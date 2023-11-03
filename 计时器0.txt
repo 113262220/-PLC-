@@ -1,0 +1,31 @@
+#include STC15Fxxxx.h
+sbit LED0=P1^6;
+int  count=0;
+void main()
+{
+	P1M1=0;
+	P1M0=0;
+
+	TMOD=0X00;
+	
+	AUXR &=~(17);
+		
+	TH0=(65536-50000)256;
+	TL0=(65536-50000)%256;
+	
+	ET0=1;
+	EA=1;
+	TR0=1;
+	   while(1)
+			 ;
+		 
+}
+void int_timer0() interrupt 1
+{
+	count++;
+	if(count==10)
+	{
+		count=0;
+		LED0=!LED0;
+	}
+}
